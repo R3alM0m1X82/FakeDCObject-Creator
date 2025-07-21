@@ -1,48 +1,40 @@
 # FakeDCObject-Creator.ps1
 
-## Overview
+## 📝 Description
 
-**FakeDCObject-Creator.ps1** is a PowerShell function designed for **red teaming labs and Active Directory persistence**.  
-It creates a **fake computer object in Active Directory**, modifies its attributes to appear as a **Domain Controller** (SERVER_TRUST_ACCOUNT + primaryGroupID 516), and thus grants **DCSync privileges** to perform replication attacks.
-Need DA privileges on AD.
+**FakeDCObject-Creator** is a PowerShell script designed for Red Team labs to automate the creation of a fake computer object with `SERVER_TRUST_ACCOUNT` privileges. This allows advanced Active Directory persistence.
 
-> ⚠️ **For education use only. Do not use for evil scopes.**
+The script:
 
----
-
-## Features
-
-- Creates a computer object with custom name and password.
-- Sets **userAccountControl to SERVER_TRUST_ACCOUNT (8192)**.
-- Sets **primaryGroupID to 516 (Domain Controllers)**.
-- Moves object to **LostAndFound container** for stealth.
-- Supports **domain auto-detection** on joined machines.
-- Verbose output for **training and demo clarity**.
-- Function-based script for easy integration in toolkits.
+- Creates a fake computer account in Active Directory.
+- Moves it to the domain's `LostAndFound` container.
+- Modifies its `userAccountControl` attribute to `8192` (SERVER_TRUST_ACCOUNT) and `primaryGroupID` to `516`, granting DCSync-like privileges.
 
 ---
 
-## Requirements
+## ⚠️ Usage Warning
 
-- PowerShell 5.1+
-- **Modules:**
-  - [Powermad](https://github.com/Kevin-Robertson/Powermad)
-  - Microsoft.ActiveDirectory.Management.dll
-  - [PowerView](https://github.com/PowerShellMafia/PowerSploit/tree/master/Recon)
-
-> Ensure modules are accessible in **C:\Tools\\** as per script paths, or edit accordingly.
+This script is intended **only for educational and authorized environments**. Do **not** use for evil purposes.
 
 ---
 
-## Usage
+## 🔧 Requirements
+DA Privileges
+
+- **Modules and tools**:
+  - [Powermad.ps1](https://github.com/Kevin-Robertson/Powermad)
+  - PowerView.ps1
+  - ADModule-master (Microsoft.ActiveDirectory.Management.dll)
+- **Permissions**:
+  - Domain user with sufficient rights to create computer accounts.
+
+---
+
+## 🚀 Usage
 
 ```powershell
-# Import script
+# Import the script
 . C:\Tools\FakeDCObject-Creator.ps1
 
-# Run function with mandatory parameter -MachineAccount
-Invoke-FakeDCObjectCreation -MachineAccount FakeDCWS01 -Verbose
-
-# Run from workgroup
-Invoke-FakeDCObjectCreation -MachineAccount FakeDCWS01 -Domain contoso.corp -DC dc.contoso.corp -Password P@ssw0rd! -Verbose
-
+# Run the function with mandatory parameters
+Invoke-FakeDCObjectCreation -MachineAccount FakeDCWS01 -Password P@ssw0rd! -Verbose
