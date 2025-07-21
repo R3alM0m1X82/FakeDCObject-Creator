@@ -2,8 +2,9 @@
 
 ## Overview
 
-**FakeDCObject-Creator.ps1** is a PowerShell function designed for **red teaming labs and Active Directory persistence training**.  
+**FakeDCObject-Creator.ps1** is a PowerShell function designed for **red teaming labs and Active Directory persistence**.  
 It creates a **fake computer object in Active Directory**, modifies its attributes to appear as a **Domain Controller** (SERVER_TRUST_ACCOUNT + primaryGroupID 516), and thus grants **DCSync privileges** to perform replication attacks.
+Need DA privileges on AD.
 
 > ⚠️ **For education use only. Do not use for evil scopes.**
 
