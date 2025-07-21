@@ -41,3 +41,7 @@ It creates a **fake computer object in Active Directory**, modifies its attribut
 
 # Run function with mandatory parameter -MachineAccount
 Invoke-FakeDCObjectCreation -MachineAccount FakeDCWS01 -Verbose
+
+# Run from workgroup
+Invoke-FakeDCObjectCreation -MachineAccount FakeDCWS01 -Domain contoso.corp -DC dc.contoso.corp -Password P@ssw0rd! -Verbose
+
